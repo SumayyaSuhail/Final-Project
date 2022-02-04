@@ -1,6 +1,8 @@
 package com.finalproject.Hotel.Booking.Application.controller;
 
+import com.finalproject.Hotel.Booking.Application.entity.Message;
 import com.finalproject.Hotel.Booking.Application.entity.User;
+import com.finalproject.Hotel.Booking.Application.service.MessageService;
 import com.finalproject.Hotel.Booking.Application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +19,13 @@ public class AppController {
     static Long userId;
     static Long movieId;
     static Long showId;
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MessageService messageService;
+
     @RequestMapping("/")
     public String index() {
         return "index";
@@ -54,7 +61,7 @@ public class AppController {
     }
 
     @RequestMapping("/home")
-    public String home(Model model, HttpServletRequest request) {
+    public String home() {
         return "home";
     }
 
@@ -92,5 +99,27 @@ public class AppController {
             userService.saveUser(user);
             return "index";
         }
+    }
+
+    @RequestMapping("/aboutUs")
+    public String aboutUs() {
+        return "aboutUs";
+    }
+
+    @RequestMapping("/contactUs")
+    public String contactUs() {
+        return "contactUs";
+    }
+
+    @PostMapping("/contactUs")
+    public String afterContact(HttpServletRequest request, Model model){
+        model.addAttribute("successMessage", "Message Sent Successfully! Admin will contact you via Email!");
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String subject = request.getParameter("subject");
+        String message = request.getParameter("message");
+        Message newMessage = new Message(name, email, subject, message);
+        messageService.saveMessage(newMessage);
+        return "/contactUs";
     }
 }
