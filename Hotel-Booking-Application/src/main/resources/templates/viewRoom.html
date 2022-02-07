@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Room</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-img {
+  /* The image used */
+  background-image: url("index.jpg");
+
+  min-height: 100px;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* Needed to position the navbar */
+  position: relative;
+}
+
+.bg {
+    height: 100%;
+}
+/* Position the navbar container inside the image */
+.container {
+  position: absolute;
+  margin: 20px;
+  width: auto;
+}
+
+/* The navbar */
+.topnav {
+  overflow: hidden;
+  background-color: white;
+}
+
+/* Navbar links */
+.topnav a {
+  float: left;
+  color: rgb(141, 36, 36);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.container-fluid-padding{
+    background-color: rgb(99,26,26);
+    color: white;
+    }
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+p{
+    width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: rgb(247,247,218);
+}
+
+/* Full-width input fields */
+input[type=text], input[type=email], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: rgb(247,247,218);
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: rgb(247,247,218);
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.mt-3{
+text-align: center;
+color: red;
+}
+
+.mt-4{
+text-align: center;
+color: green;
+}
+
+h1{
+color:rgb(99,26,26);
+padding-top:2%;
+padding-left:65%;
+}
+
+h3{
+color:rgb(99,26,26);
+padding-top:2%;
+padding-left:65%;
+}
+.card-body {
+  margin-left: 25%;
+  margin-right:25%;
+  padding-bottom: 1.5%;
+  background-color:rgb(247,247,218);
+
+}
+.card-body {
+  margin-top: 5%;
+  margin-left: 25%;
+  margin-right:29%;
+  margin-bottom: 8%;
+}
+h4{
+    text-align: center;
+  margin: 24px 0 12px 0;
+}
+.editbtn{
+  background-color:rgb(99,26,26);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.delbtn {
+  background-color:rgb(99,26,26);
+  color: white;
+  margin-left:70%;
+  margin-bottom: 1%;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+<div class="bg-img">
+    <div class="container">
+        <div class="topnav">
+            <a href="/admin">Home</a>
+            <a href="/messages">Messages</a>
+            <a href="/history">Bookings</a>
+        </div>
+    </div>
+    <h1>My Booking!</h1>
+    <h3>Admin Page</h3>
+</div>
+<div class="mt-4">
+     <span class="text-center text-success">
+         <div th:text="${successMessage}"/>
+    </span>
+</div>
+<form action="/deleteRoom" method="post">
+    <button type="submit" class="delbtn">Delete</button>
+</form>
+<div class="card-body" style="background-color:rgb(247,247,218)">
+    <form action="/editRoom">
+        <h4>Room Details</h4>
+        <label for="roomNumber"><b>Room Number</b></label>
+        <p><span th:text="${roomNumber}" id="roomNumber"></span></p>
+
+        <label for="roomType"><b>Room Type</b></label>
+        <p><span th:text="${roomType}" id="roomType"></span></p>
+
+        <label for="maxAdults"><b>Max Adults</b></label>
+        <p><span th:text="${maxAdults}" id="maxAdults"></span></p>
+
+        <label for="maxChild"><b>Max Child</b></label><br/>
+        <p><span th:text="${maxChild}" id="maxChild"></span></p>
+
+        <label for="numberOfBeds"><b>Number Of Beds</b></label><br/>
+        <p><span th:text="${numberOfBeds}" id="numberOfBeds"></span></p>
+
+        <label for="roomFare"><b>Room Fare</b></label><br/>
+        <p><span th:text="${roomFare}" id="roomFare"></span></p>
+
+        <button type="submit" class="editbtn">Edit</button>
+    </form>
+</div>
+<footer>
+    <div class="container-fluid-padding">
+        <div class="row text-centre">
+            <div class="col-md-6">
+                <h5>My Booking!</h5>
+                <h6>bookings@myBooking.com</h6>
+                <h6>City, State, 000000</h6>
+                <h5>&copy; MyBooking2020</h5>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
