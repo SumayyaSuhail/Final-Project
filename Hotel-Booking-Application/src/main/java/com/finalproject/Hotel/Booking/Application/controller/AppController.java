@@ -352,7 +352,7 @@ public class AppController {
 
     @PostMapping("/addType")
     public String afterAddingRoomType(HttpServletRequest request, Model model) {
-        model.addAttribute("successMessage", "Room Type Added Successfully!");
+        model.addAttribute("successMessage", request.getParameter("name")+ " Added Successfully!");
         String roomType = request.getParameter("name");
         Integer maxAdults = Integer.parseInt(request.getParameter("maxAdults"));
         Integer maxChild = Integer.parseInt(request.getParameter("maxChild"));
