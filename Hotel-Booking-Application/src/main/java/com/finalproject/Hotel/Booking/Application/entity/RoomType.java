@@ -1,19 +1,17 @@
 package com.finalproject.Hotel.Booking.Application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
 @Component
 @Entity
-public class Room {
+public class RoomType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "roomnumber")
-    private Integer roomNumber;
-    @Column(name = "roomtype")
-    private String roomType;
+    private String name;
     @Column(name = "roomfare")
     private Double roomFare;
     @Column(name = "maxadults")
@@ -22,20 +20,17 @@ public class Room {
     private Integer maxChild;
     @Column(name = "numberofbeds")
     private Integer numberOfBeds;
-    private String status;
 
-    public Room(){
+    public RoomType(){
 
     }
 
-    public Room(Integer roomNumber, String roomType, Double roomFare, Integer maxAdults, Integer maxChild, Integer numberOfBeds, String status){
-        this.roomNumber=roomNumber;
-        this.roomType=roomType;
+    public RoomType(String name, Double roomFare, Integer maxAdults, Integer maxChild, Integer numberOfBeds){
+        this.name=name;
         this.roomFare=roomFare;
         this.maxAdults=maxAdults;
         this.maxChild=maxChild;
         this.numberOfBeds=numberOfBeds;
-        this.status=status;
     }
 
     public Long getId() {
@@ -46,20 +41,12 @@ public class Room {
         this.id = id;
     }
 
-    public Integer getRoomNumber() {
-        return roomNumber;
+    public String getName() {
+        return name;
     }
 
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public String getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Double getRoomFare() {
@@ -92,13 +79,5 @@ public class Room {
 
     public void setNumberOfBeds(Integer numberOfBeds) {
         this.numberOfBeds = numberOfBeds;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

@@ -1,13 +1,7 @@
 package com.finalproject.Hotel.Booking.Application.controller;
 
-import com.finalproject.Hotel.Booking.Application.entity.Admin;
-import com.finalproject.Hotel.Booking.Application.entity.Message;
-import com.finalproject.Hotel.Booking.Application.entity.Room;
-import com.finalproject.Hotel.Booking.Application.entity.User;
-import com.finalproject.Hotel.Booking.Application.service.AdminService;
-import com.finalproject.Hotel.Booking.Application.service.MessageService;
-import com.finalproject.Hotel.Booking.Application.service.RoomService;
-import com.finalproject.Hotel.Booking.Application.service.UserService;
+import com.finalproject.Hotel.Booking.Application.entity.*;
+import com.finalproject.Hotel.Booking.Application.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +17,12 @@ import java.util.Objects;
 public class AppController {
     static Long userId;
     static Long adminId;
+    static Long roomTypeId;
     static Long roomId;
+    static String bookedDate;
+    static Integer numberOfDays;
+    @Autowired
+    private HistoryService historyService;
 
     @Autowired
     private UserService userService;
@@ -36,6 +35,12 @@ public class AppController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private RoomTypeService roomTypeService;
+
+    @Autowired
+    private BookedRoomService bookedRoomService;
 
     @RequestMapping("/")
     public String index() {
@@ -109,6 +114,8 @@ public class AppController {
         if (!(Objects.isNull(user))) {
             model.addAttribute("successMessage", "Login Successful!!!");
             userId = user.getUserId();
+            List<RoomType> roomTypes = roomTypeService.getAllTypes();
+            model.addAttribute("roomTypes", roomTypes);
             return "home";
         } else {
             Admin admin = adminService.getAdminByEmailAndPassword(request.getParameter("email"), request.getParameter("password"));
@@ -210,7 +217,7 @@ public class AppController {
         Integer maxChild = Integer.parseInt(request.getParameter("maxChild"));
         Integer numberOfBeds = Integer.parseInt(request.getParameter("numberOfBeds"));
         Double roomFare = Double.parseDouble(request.getParameter("roomFare"));
-        Room room = new Room(roomNumber, roomType, roomFare, maxAdults, maxChild, numberOfBeds);
+        Room room = new Room(roomNumber, roomType, roomFare, maxAdults, maxChild, numberOfBeds,"false");
         roomService.saveRoom(room);
         return "addRoom";
     }
@@ -225,17 +232,15 @@ public class AppController {
         model.addAttribute("maxChild", room.getMaxChild());
         model.addAttribute("numberOfBeds", room.getNumberOfBeds());
         model.addAttribute("roomFare", room.getRoomFare());
+        model.addAttribute("status", room.getStatus());
         return "viewRoom";
     }
 
     @PostMapping("/viewRoom")
     public String afterUpdate(HttpServletRequest request, Model model) {
         Room room = roomService.getRoomById(roomId);
-        room.setRoomType(request.getParameter("roomType"));
-        room.setMaxAdults(Integer.parseInt(request.getParameter("maxAdults")));
-        room.setMaxChild(Integer.parseInt(request.getParameter("maxChild")));
-        room.setNumberOfBeds(Integer.parseInt(request.getParameter("numberOfBeds")));
         room.setRoomFare(Double.parseDouble(request.getParameter("roomFare")));
+        room.setStatus(request.getParameter("status"));
         roomService.saveRoom(room);
         model.addAttribute("roomNumber", room.getRoomNumber());
         model.addAttribute("roomType", room.getRoomType());
@@ -243,6 +248,7 @@ public class AppController {
         model.addAttribute("maxChild", room.getMaxChild());
         model.addAttribute("numberOfBeds", room.getNumberOfBeds());
         model.addAttribute("roomFare", room.getRoomFare());
+        model.addAttribute("status", room.getStatus());
         model.addAttribute("successMessage", "Edit Successful!!!");
         return "viewRoom";
     }
@@ -256,6 +262,7 @@ public class AppController {
         model.addAttribute("maxChild", room.getMaxChild());
         model.addAttribute("numberOfBeds", room.getNumberOfBeds());
         model.addAttribute("roomFare", room.getRoomFare());
+        model.addAttribute("status", room.getStatus());
         return "editRoom";
     }
 
@@ -264,11 +271,70 @@ public class AppController {
         Room room = roomService.getRoomById(roomId);
         roomService.deleteRoom(roomId);
         model.addAttribute("successMessage", "Deletion Successful!!!");
+        List<Room> rooms = roomService.getAllRooms();
+        model.addAttribute("rooms", rooms);
         return "admin";
     }
 
     @RequestMapping("/history")
     public String history(Model model){
+        model.addAttribute("histories", historyService.getAllHistories());
         return "history";
+    }
+
+    @RequestMapping("/searchRoom")
+    public String searchRoom(HttpServletRequest request, Model model){
+        List<RoomType> roomTypes = roomTypeService.getAllTypes();
+        model.addAttribute("roomTypes", roomTypes);
+        return "searchRoom";
+    }
+
+    @RequestMapping("/bookRoom")
+    public String bookRoom(HttpServletRequest request){
+        roomTypeId = Long.parseLong(request.getParameter("roomId"));
+        bookedDate=request.getParameter("bookingDate");
+        numberOfDays=Integer.parseInt(request.getParameter("numberOfDays"));
+        System.out.println(bookedDate);
+        System.out.println(numberOfDays);
+        return "bookRoom";
+    }
+
+    @PostMapping("/payment")
+    public String payment(HttpServletRequest request, Model model){
+        String bookedRooms = request.getParameter("bookedRooms");
+        StringBuffer stringBuffer= new StringBuffer(bookedRooms);
+        stringBuffer.deleteCharAt(stringBuffer.length()-1);
+        String[] rooms = bookedRooms.split(",");
+        System.out.println(stringBuffer);
+        RoomType roomType = roomTypeService.getById(roomTypeId);
+        for (String room : rooms) {
+            Integer roomNumber = Integer.parseInt(room);
+            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
+            if (!(Objects.isNull(bookedRoom))) {
+                model.addAttribute("message", "Room is already booked, Please choose another room");
+                return "bookRoom";
+            }
+        }
+        for (String room : rooms) {
+            Integer roomNumber = Integer.parseInt(room);
+            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
+            BookedRoom bookedRoom1 = new BookedRoom(roomType.getName(), roomNumber, userId);
+            bookedRoomService.saveBooking(bookedRoom1);
+        }
+        model.addAttribute("userId", userId);
+        model.addAttribute("roomTypeId", roomTypeId);
+        model.addAttribute("roomCount", rooms.length);
+        model.addAttribute("rooms", stringBuffer);
+        model.addAttribute("bookedDate", bookedDate);
+        Double amount = ((rooms.length) * (roomType.getRoomFare()))*(numberOfDays);
+        model.addAttribute("amount", amount);
+        History history = new History(userId, roomTypeId, bookedDate, rooms.length, stringBuffer.toString(), amount);
+        historyService.saveHistory(history);
+        return "payment";
+    }
+    @RequestMapping("/myBookings")
+    public String myBookings(Model model){
+        model.addAttribute("histories", historyService.getHistoryByUserId(userId));
+        return "myBookings";
     }
 }

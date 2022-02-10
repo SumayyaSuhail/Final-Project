@@ -183,19 +183,22 @@ h4{
         <input type="text" name="roomNumber" id="roomNumber" th:value="${roomNumber}" disabled>
 
         <label for="roomType"><b>Room Type</b></label>
-        <input type="text" name="roomType" id="roomType" th:value="${roomType}">
+        <input type="text" name="roomType" id="roomType" th:value="${roomType}" disabled>
 
         <label for="maxAdults"><b>Max Adults</b></label>
-        <input type="number" name="maxAdults" id="maxAdults" th:value="${maxAdults}">
+        <input type="number" name="maxAdults" id="maxAdults" th:value="${maxAdults}" disabled>
 
         <label for="maxChild"><b>Max Child</b></label><br/>
-        <input type="text" name="maxChild" id="maxChild" th:value="${maxChild}">
+        <input type="text" name="maxChild" id="maxChild" th:value="${maxChild}" disabled>
 
         <label for="numberOfBeds"><b>Number Of Beds</b></label><br/>
-        <input type="number" name="numberOfBeds" id="numberOfBeds" th:value="${numberOfBeds}">
+        <input type="number" name="numberOfBeds" id="numberOfBeds" th:value="${numberOfBeds}" disabled>
 
         <label for="roomFare"><b>Room Fare</b></label><br/>
         <input type="text" name="roomFare" id="roomFare" th:value="${roomFare}">
+
+        <label for="status"><b>Room Status</b></label><br/>
+        <input type="text" name="status" id="status" th:value="${status}">
 
         <button type="submit" class="editbtn">Update</button>
     </form>
