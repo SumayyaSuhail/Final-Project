@@ -360,6 +360,6 @@ public class AppController {
         Double roomFare = Double.parseDouble(request.getParameter("roomFare"));
         RoomType addedType = new RoomType(roomType, roomFare, maxAdults, maxChild, numberOfBeds);
         roomTypeService.saveRoomType(addedType);
-        return "addRoom";
+        return "addType";
     }
 }
