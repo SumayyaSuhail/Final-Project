@@ -17,8 +17,8 @@ public class RoomTypeService {
         return repository.findAll();
     }
 
-    public RoomType getById(Long roomTypeId) {
-        return repository.getById(roomTypeId);
+    public RoomType getByName(String roomType) {
+        return repository.findByName(roomType);
     }
 
     public void saveRoomType(RoomType addedType) {

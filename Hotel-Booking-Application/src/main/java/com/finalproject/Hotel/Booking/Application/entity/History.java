@@ -15,7 +15,7 @@ public class History {
     @Column(name = "userid")
     private Long userId;
     @Column(name = "roomtypeid")
-    private Long roomTypeId;
+    private String roomTypeId;
     @Column(name = "bookeddate")
     private Date bookedDate;
     @Column(name = "roomcount")
@@ -27,7 +27,7 @@ public class History {
     public History(){
 
     }
-    public History(Long userId, Long roomTypeId, Date bookedDate, Integer roomCount, String bookedRooms, Double amount) {
+    public History(Long userId, String roomTypeId, Date bookedDate, Integer roomCount, String bookedRooms, Double amount) {
         this.userId=userId;
         this.roomTypeId=roomTypeId;
         this.bookedDate=bookedDate;
@@ -52,11 +52,11 @@ public class History {
         this.userId = userId;
     }
 
-    public Long getRoomTypeId() {
+    public String getRoomTypeId() {
         return roomTypeId;
     }
 
-    public void setRoomTypeId(Long roomTypeId) {
+    public void setRoomTypeId(String roomTypeId) {
         this.roomTypeId = roomTypeId;
     }
 

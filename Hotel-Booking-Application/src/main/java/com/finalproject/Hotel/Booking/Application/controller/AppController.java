@@ -18,7 +18,7 @@ import java.util.Objects;
 public class AppController {
     static Long userId;
     static Long adminId;
-    static Long roomTypeId;
+    static String staticRoomType;
     static Long roomId;
     static Date bookedDate;
     static Integer numberOfDays;
@@ -292,7 +292,7 @@ public class AppController {
 
     @RequestMapping("/bookRoom")
     public String bookRoom(HttpServletRequest request){
-        roomTypeId = Long.parseLong(request.getParameter("roomId"));
+        staticRoomType = request.getParameter("roomId");
         bookedDate= Date.valueOf(request.getParameter("bookingDate"));
         numberOfDays=Integer.parseInt(request.getParameter("numberOfDays"));
         System.out.println(bookedDate);
@@ -307,7 +307,7 @@ public class AppController {
         stringBuffer.deleteCharAt(stringBuffer.length()-1);
         String[] rooms = bookedRooms.split(",");
         System.out.println(stringBuffer);
-        RoomType roomType = roomTypeService.getById(roomTypeId);
+        RoomType roomType = roomTypeService.getByName(staticRoomType);
         for (String room : rooms) {
             Integer roomNumber = Integer.parseInt(room);
             BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
@@ -323,13 +323,13 @@ public class AppController {
             bookedRoomService.saveBooking(bookedRoom1);
         }
         model.addAttribute("userId", userId);
-        model.addAttribute("roomTypeId", roomTypeId);
+        model.addAttribute("roomTypeId", staticRoomType);
         model.addAttribute("roomCount", rooms.length);
         model.addAttribute("rooms", stringBuffer);
         model.addAttribute("bookedDate", bookedDate);
         Double amount = ((rooms.length) * (roomType.getRoomFare()))*(numberOfDays);
         model.addAttribute("amount", amount);
-        History history = new History(userId, roomTypeId, bookedDate, rooms.length, stringBuffer.toString(), amount);
+        History history = new History(userId, staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
         historyService.saveHistory(history);
         return "payment";
     }
