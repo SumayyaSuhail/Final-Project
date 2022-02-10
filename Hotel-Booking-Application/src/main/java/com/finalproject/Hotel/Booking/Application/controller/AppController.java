@@ -338,4 +338,28 @@ public class AppController {
         model.addAttribute("histories", historyService.getHistoryByUserId(userId));
         return "myBookings";
     }
+
+    @RequestMapping("/addRoomType")
+    public String addRoomType(Model model){
+        model.addAttribute("types", roomTypeService.getAllTypes());
+        return "addRoomType";
+    }
+
+    @RequestMapping("/addType")
+    public String addType(){
+        return "addType";
+    }
+
+    @PostMapping("/addType")
+    public String afterAddingRoomType(HttpServletRequest request, Model model) {
+        model.addAttribute("successMessage", "Room Type Added Successfully!");
+        String roomType = request.getParameter("name");
+        Integer maxAdults = Integer.parseInt(request.getParameter("maxAdults"));
+        Integer maxChild = Integer.parseInt(request.getParameter("maxChild"));
+        Integer numberOfBeds = Integer.parseInt(request.getParameter("numberOfBeds"));
+        Double roomFare = Double.parseDouble(request.getParameter("roomFare"));
+        RoomType addedType = new RoomType(roomType, roomFare, maxAdults, maxChild, numberOfBeds);
+        roomTypeService.saveRoomType(addedType);
+        return "addRoom";
+    }
 }

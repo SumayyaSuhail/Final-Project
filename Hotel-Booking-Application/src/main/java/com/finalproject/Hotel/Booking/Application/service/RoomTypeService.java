@@ -20,4 +20,8 @@ public class RoomTypeService {
     public RoomType getById(Long roomTypeId) {
         return repository.getById(roomTypeId);
     }
+
+    public void saveRoomType(RoomType addedType) {
+        repository.save(addedType);
+    }
 }
