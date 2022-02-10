@@ -3,6 +3,7 @@ package com.finalproject.Hotel.Booking.Application.entity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Component
 @Entity
@@ -16,7 +17,7 @@ public class History {
     @Column(name = "roomtypeid")
     private Long roomTypeId;
     @Column(name = "bookeddate")
-    private String bookedDate;
+    private Date bookedDate;
     @Column(name = "roomcount")
     private Integer roomCount;
     @Column(name = "bookedrooms")
@@ -26,7 +27,7 @@ public class History {
     public History(){
 
     }
-    public History(Long userId, Long roomTypeId, String bookedDate, Integer roomCount, String bookedRooms, Double amount) {
+    public History(Long userId, Long roomTypeId, Date bookedDate, Integer roomCount, String bookedRooms, Double amount) {
         this.userId=userId;
         this.roomTypeId=roomTypeId;
         this.bookedDate=bookedDate;
@@ -59,11 +60,11 @@ public class History {
         this.roomTypeId = roomTypeId;
     }
 
-    public String getBookedDate() {
+    public Date getBookedDate() {
         return bookedDate;
     }
 
-    public void setBookedDate(String bookingDate) {
+    public void setBookedDate(Date bookingDate) {
         this.bookedDate = bookingDate;
     }
 

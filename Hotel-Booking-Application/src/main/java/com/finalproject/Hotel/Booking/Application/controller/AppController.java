@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class AppController {
     static Long adminId;
     static Long roomTypeId;
     static Long roomId;
-    static String bookedDate;
+    static Date bookedDate;
     static Integer numberOfDays;
     @Autowired
     private HistoryService historyService;
@@ -292,7 +293,7 @@ public class AppController {
     @RequestMapping("/bookRoom")
     public String bookRoom(HttpServletRequest request){
         roomTypeId = Long.parseLong(request.getParameter("roomId"));
-        bookedDate=request.getParameter("bookingDate");
+        bookedDate= Date.valueOf(request.getParameter("bookingDate"));
         numberOfDays=Integer.parseInt(request.getParameter("numberOfDays"));
         System.out.println(bookedDate);
         System.out.println(numberOfDays);
