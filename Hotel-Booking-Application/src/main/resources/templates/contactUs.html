@@ -12,12 +12,8 @@
 
   min-height: 100px;
   /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 
-  /* Needed to position the navbar */
-  position: relative;
+
 }
 
 .bg {
@@ -54,8 +50,14 @@ button:hover {
 /* Position the navbar container inside the image */
 .container {
   position: absolute;
-  margin: 20px;
+  margin: 18px;
   width: auto;
+}
+
+.navcontainer {
+  position: absolute;
+  margin: 1%;
+  margin-left:7.5%;
 }
 
 
@@ -72,7 +74,7 @@ button:hover {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 16px;
   font-weight:bold;
 }
 .container-fluid-padding{
@@ -87,7 +89,7 @@ button:hover {
 
 .card-body {
   margin-top: 5%;
-  margin-left: 25%;
+  margin-left: 24%;
   margin-right:26%;
 }
 
@@ -117,7 +119,7 @@ color: green;
     </span>
     </div>
     <div class="bg-img">
-        <div class="container">
+        <div class="navcontainer">
             <div class="topnav">
                 <a href="/">HOME</a>
                 <a href="/aboutUs">ABOUT US</a>
@@ -148,20 +150,5 @@ color: green;
         </form>
     </div>
 </div>
-<footer>
-    <div class="container-fluid-padding">
-        <div class="row text-centre">
-            <div class="col-md-6">
-                <h5>My Booking!</h5>
-                <p>bookings@myBooking.com</p>
-                <p>City, State, 000000</p>
-            </div>
-            <div class="col-12">
-                <h4>&copy; MyBooking2020</h4>
-            </div>
-
-        </div>
-    </div>
-</footer>
 </body>
 </html>

@@ -322,6 +322,12 @@ public class AppController {
             BookedRoom bookedRoom1 = new BookedRoom(roomType.getName(), roomNumber, userId);
             bookedRoomService.saveBooking(bookedRoom1);
         }
+        for (String room : rooms) {
+            Integer roomNumber = Integer.parseInt(room);
+            Room selectedRoom = roomService.getRoomByNumberAndType(roomNumber, roomType.getName());
+            selectedRoom.setStatus("true");
+            roomService.saveRoom(selectedRoom);
+        }
         model.addAttribute("userId", userId);
         model.addAttribute("roomTypeId", staticRoomType);
         model.addAttribute("roomCount", rooms.length);
@@ -352,7 +358,7 @@ public class AppController {
 
     @PostMapping("/addType")
     public String afterAddingRoomType(HttpServletRequest request, Model model) {
-        model.addAttribute("successMessage", request.getParameter("roomType")+ " Added Successfully!");
+        model.addAttribute("successMessage", "Room Type Added Successfully!");
         String roomType = request.getParameter("roomType");
         Integer maxAdults = Integer.parseInt(request.getParameter("maxAdults"));
         Integer maxChild = Integer.parseInt(request.getParameter("maxChild"));

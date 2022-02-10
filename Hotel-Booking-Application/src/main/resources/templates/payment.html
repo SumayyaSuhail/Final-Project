@@ -71,12 +71,17 @@ hr {
 .bookbtn:hover {
   opacity: 1;
 }
+h1{
+color:rgb(99,26,26);
+padding-top:2%;
+padding-left:65%;
+}
+
     </style>
 </head>
 <body>
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style=" color:rgb(247,247,218);">
-    <a class="navbar-brand" href="#" style="rgb(99,26,26);">My Show</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -86,14 +91,18 @@ hr {
             <li class="nav-item active">
                 <a class="nav-link" href="/home" style="color:  rgb(99,26,26);">Home</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/myBookings" style="color:  rgb(99,26,26);">My Bookings</a>
+            </li>
         </ul>
     </div>
     <div>
         <a class="nav-link" href="/" style="color:  rgb(99,26,26);">Logout</a>
     </div>
 </nav>
+<h1>My Booking!</h1>
 <div class="container">
-        <h1>Payment</h1>
+        <h2>Payment</h2>
         <label for="userId"><b>User Id</b></label>
         <p><span th:text="${userId}" id="userId"></span></p>
 

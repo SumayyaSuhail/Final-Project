@@ -78,10 +78,9 @@ button {
 }
 
 .card-body {
-  margin-top: 5%;
-  margin-left: 25%;
+  margin-left: 27%;
   margin-right:29%;
-  margin-bottom: 8%;
+  margin-bottom: 3%;
 }
 
 .content-table {
@@ -146,12 +145,11 @@ color: green;
     <div class="container">
         <div class="topnav">
             <a href="#">HOME</a>
-            <a href="/aboutUs">ABOUT US</a>
             <a href="/myBookings">MY BOOKINGS</a>
-            <a href="/contactUs">CONTACT US</a>
             <a href="/">LOGOUT</a>
         </div>
     </div>
+    <h1>My Booking!</h1>
 </div>
 </div>
 <div class="mt-4">
@@ -186,16 +184,16 @@ color: green;
 <div class="card-body" style="background-color:rgb(247,247,218)">
     <form action="/bookRoom">
         <label for="bookingDate"><b>Date</b></label>
-        <input type="Date" name="bookingDate" placeholder="Enter Date" id="bookingDate" required/>
+        <input type="Date" name="bookingDate" placeholder="Enter Date" id="bookingDate" required/><br><br>
 
         <label for="numberOfDays"><b>No. of Days</b></label>
-        <input type="number" name="numberOfDays" placeholder="Enter Date" id="numberOfDays" required/>
+        <input type="number" name="numberOfDays" placeholder="No. of Days" id="numberOfDays" required/><br><br>
 
         <label for="roomType"><b>Choose AC/Non AC</b></label><br/>
         <select id="roomType" name="roomId">
             <option value="AC">AC Room</option>
             <option value="Non AC">Non AC</option>
-        </select>
+        </select><br><br>
         <button type="submit" class="buckbtn">Search Room</button>
     </form>
 </div>
@@ -206,11 +204,8 @@ color: green;
                 <h5>My Booking!</h5>
                 <p>bookings@myBooking.com</p>
                 <p>City, State, 000000</p>
-            </div>
-            <div class="col-12">
                 <h4>&copy; MyBooking2020</h4>
             </div>
-
         </div>
     </div>
 </footer>

@@ -29,4 +29,8 @@ public class RoomService {
     public void deleteRoom(Long roomId) {
         roomRepository.deleteById(roomId);
     }
+
+    public Room getRoomByNumberAndType(Integer roomNumber, String name) {
+        return roomRepository.findRoomByNumberAndType(roomNumber, name);
+    }
 }

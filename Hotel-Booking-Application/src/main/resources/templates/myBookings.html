@@ -144,14 +144,12 @@ color: green;
 <div class="bg-img">
     <div class="container">
         <div class="topnav">
-            <a href="/admin">Home</a>
-            <a href="/messages">Messages</a>
-            <a href="/history">Bookings</a>
+            <a href="/home">Home</a>
+            <a href="/myBookings">My Bookings</a>
             <a href="/">Logout</a>
         </div>
     </div>
     <h1>My Booking!</h1>
-    <h3>Admin Page</h3>
 </div>
 </div>
 <div class="mt-4">
@@ -179,9 +177,6 @@ color: green;
                     <td th:text="${history.roomCount}"></td>
                     <td th:text="${history.bookedRooms}"></td>
                     <td th:text="${history.amount}"></td>
-                    <!--                    <td>-->
-                    <!--                        <button type="submit" class="buckbtn" th:value="${history.id}" name="historyId">Vacated</button>-->
-                    <!--                    </td>-->
                 </tr>
                 </tbody>
             </table>
@@ -195,11 +190,8 @@ color: green;
                 <h5>My Booking!</h5>
                 <p>bookings@myBooking.com</p>
                 <p>City, State, 000000</p>
-            </div>
-            <div class="col-12">
                 <h4>&copy; MyBooking2020</h4>
             </div>
-
         </div>
     </div>
 </footer>
