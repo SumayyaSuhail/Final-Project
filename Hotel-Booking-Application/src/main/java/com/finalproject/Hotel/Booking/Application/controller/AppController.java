@@ -415,6 +415,7 @@ public class AppController {
     @PostMapping("/payment")
     public String payment(HttpServletRequest request, Model model){
         String bookedRooms = request.getParameter("bookedRooms");
+        model.addAttribute("message", userId+bookedRooms);
         StringBuffer stringBuffer= new StringBuffer(bookedRooms);
         stringBuffer.deleteCharAt(stringBuffer.length()-1);
         String[] rooms = bookedRooms.split(",");
@@ -459,7 +460,8 @@ public class AppController {
      */
     @RequestMapping("/myBookings")
     public String myBookings(Model model){
-        model.addAttribute("histories", historyService.getHistoryByUserId(userId));
+        List<History> histories = historyService.getHistoryByUserId(userId);
+        model.addAttribute("histories", histories);
         return "myBookings";
     }
 

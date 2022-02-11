@@ -67,7 +67,10 @@ hr {
   width: 100%;
   opacity: 0.9;
 }
-
+.mt-4{
+text-align: center;
+color: green;
+}
 .bookbtn:hover {
   opacity: 1;
 }
@@ -102,6 +105,11 @@ padding-left:65%;
 </nav>
 <h1>My Booking!</h1>
 <div class="container">
+    <div class="mt-4">
+     <span class="text-center text-success">
+         <div th:text="${message}"/>
+    </span>
+    </div>
         <h2>Payment</h2>
         <label for="userId"><b>User Id</b></label>
         <p><span th:text="${userId}" id="userId"></span></p>
