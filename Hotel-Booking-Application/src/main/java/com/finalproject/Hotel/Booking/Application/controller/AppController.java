@@ -415,10 +415,10 @@ public class AppController {
     @PostMapping("/payment")
     public String payment(HttpServletRequest request, Model model){
         String bookedRooms = request.getParameter("bookedRooms");
-        model.addAttribute("message", userId);
         StringBuffer stringBuffer= new StringBuffer(bookedRooms);
         stringBuffer.deleteCharAt(stringBuffer.length()-1);
         String[] rooms = bookedRooms.split(",");
+        model.addAttribute("message", rooms);
         System.out.println(stringBuffer);
         RoomType roomType = roomTypeService.getByName(staticRoomType);
         for (String room : rooms) {
