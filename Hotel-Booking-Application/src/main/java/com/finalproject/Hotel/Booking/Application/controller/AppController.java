@@ -412,32 +412,32 @@ public class AppController {
      */
     @PostMapping("/payment")
     public String payment(HttpServletRequest request, Model model){
-        String bookedRooms = request.getParameter("bookedRooms");
-        StringBuffer stringBuffer= new StringBuffer(bookedRooms);
-        stringBuffer.deleteCharAt(stringBuffer.length()-1);
-        String[] rooms = bookedRooms.split(",");
-        System.out.println(stringBuffer);
-        RoomType roomType = roomTypeService.getByName(staticRoomType);
-        for (String room : rooms) {
-            Integer roomNumber = Integer.parseInt(room);
-            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
-            if (!(Objects.isNull(bookedRoom))) {
-                model.addAttribute("message", "Room is already booked, Please choose another room");
-                return "bookRoom";
-            }
-        }
-        for (String room : rooms) {
-            Integer roomNumber = Integer.parseInt(room);
-            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
-            BookedRoom bookedRoom1 = new BookedRoom(roomType.getName(), roomNumber, userId);
-            bookedRoomService.saveBooking(bookedRoom1);
-        }
-        for (String room : rooms) {
-            Integer roomNumber = Integer.parseInt(room);
-            Room selectedRoom = roomService.getRoomByNumberAndType(roomNumber, roomType.getName());
-            selectedRoom.setStatus("true");
-            roomService.saveRoom(selectedRoom);
-        }
+//        String bookedRooms = request.getParameter("bookedRooms");
+//        StringBuffer stringBuffer= new StringBuffer(bookedRooms);
+//        stringBuffer.deleteCharAt(stringBuffer.length()-1);
+//        String[] rooms = bookedRooms.split(",");
+//        System.out.println(stringBuffer);
+//        RoomType roomType = roomTypeService.getByName(staticRoomType);
+//        for (String room : rooms) {
+//            Integer roomNumber = Integer.parseInt(room);
+//            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
+//            if (!(Objects.isNull(bookedRoom))) {
+//                model.addAttribute("message", "Room is already booked, Please choose another room");
+//                return "bookRoom";
+//            }
+//        }
+//        for (String room : rooms) {
+//            Integer roomNumber = Integer.parseInt(room);
+//            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
+//            BookedRoom bookedRoom1 = new BookedRoom(roomType.getName(), roomNumber, userId);
+//            bookedRoomService.saveBooking(bookedRoom1);
+//        }
+//        for (String room : rooms) {
+//            Integer roomNumber = Integer.parseInt(room);
+//            Room selectedRoom = roomService.getRoomByNumberAndType(roomNumber, roomType.getName());
+//            selectedRoom.setStatus("true");
+//            roomService.saveRoom(selectedRoom);
+//        }
 //        model.addAttribute("userId", userId);
 //        model.addAttribute("roomTypeId", staticRoomType);
 //        model.addAttribute("roomCount", rooms.length);
