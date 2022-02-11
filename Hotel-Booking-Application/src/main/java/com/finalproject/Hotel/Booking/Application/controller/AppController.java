@@ -428,18 +428,18 @@ public class AppController {
                 return "bookRoom";
             }
         }
-//        for (String room : rooms) {
-//            Integer roomNumber = Integer.parseInt(room);
-//            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
-//            BookedRoom bookedRoom1 = new BookedRoom(roomType.getName(), roomNumber, userId);
-//            bookedRoomService.saveBooking(bookedRoom1);
-//        }
-//        for (String room : rooms) {
-//            Integer roomNumber = Integer.parseInt(room);
-//            Room selectedRoom = roomService.getRoomByNumberAndType(roomNumber, roomType.getName());
-//            selectedRoom.setStatus("true");
-//            roomService.saveRoom(selectedRoom);
-//        }
+        for (String room : rooms) {
+            Integer roomNumber = Integer.parseInt(room);
+            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
+            BookedRoom bookedRoom1 = new BookedRoom(roomType.getName(), roomNumber, userId);
+            bookedRoomService.saveBooking(bookedRoom1);
+        }
+        for (String room : rooms) {
+            Integer roomNumber = Integer.parseInt(room);
+            Room selectedRoom = roomService.getRoomByNumberAndType(roomNumber, roomType.getName());
+            selectedRoom.setStatus("true");
+            roomService.saveRoom(selectedRoom);
+        }
 //        model.addAttribute("userId", userId);
 //        model.addAttribute("roomTypeId", staticRoomType);
 //        model.addAttribute("roomCount", rooms.length);
