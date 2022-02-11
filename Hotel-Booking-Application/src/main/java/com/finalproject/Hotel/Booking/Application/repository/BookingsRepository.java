@@ -13,6 +13,6 @@ public interface BookingsRepository extends JpaRepository<Bookings, Long> {
      * @param userId
      * @return list of Bookings
      */
-    @Query("Select history from History history where history.userId=:userId")
+    @Query("Select bookings from Bookings bookings where bookings.userId=:userId")
     List<Bookings> findBookingsByUserId(Long userId);
 }
