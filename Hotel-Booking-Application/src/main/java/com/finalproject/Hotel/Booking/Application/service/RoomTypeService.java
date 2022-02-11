@@ -40,4 +40,8 @@ public class RoomTypeService {
     public void saveRoomType(RoomType addedType) {
         repository.save(addedType);
     }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }

@@ -501,4 +501,13 @@ public class AppController {
         roomTypeService.saveRoomType(addedType);
         return "addType";
     }
+
+    @RequestMapping("/clearAll")
+    public String clearAll(Model model){
+        model.addAttribute("successMessage", "Clearing Successful!");
+        roomTypeService.deleteAll();
+        historyService.deleteAll();
+        bookedRoomService.deleteAll();
+        return "admin";
+    }
 }

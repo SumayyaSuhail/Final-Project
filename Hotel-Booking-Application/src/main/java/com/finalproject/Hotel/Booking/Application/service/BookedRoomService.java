@@ -31,4 +31,8 @@ public class BookedRoomService {
     public BookedRoom getBookedRoomByRoomNumberAndRoomType(Integer roomNumber, String roomType) {
         return bookedRoomRepository.findBookedRoomByRoomNumberAndRoomType(roomNumber, roomType);
     }
+
+    public void deleteAll() {
+        bookedRoomRepository.deleteAll();
+    }
 }

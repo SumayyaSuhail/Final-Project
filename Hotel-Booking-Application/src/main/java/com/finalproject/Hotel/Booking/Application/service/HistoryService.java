@@ -40,4 +40,8 @@ public class HistoryService {
     public List<History> getAllHistories() {
         return historyRepository.findAll();
     }
+
+    public void deleteAll() {
+        historyRepository.deleteAll();
+    }
 }
