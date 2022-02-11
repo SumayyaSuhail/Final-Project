@@ -136,7 +136,9 @@ public class AppController {
      * @return home.html
      */
     @RequestMapping("/home")
-    public String home() {
+    public String home(Model model) {
+        List<RoomType> roomTypes = roomTypeService.getAllTypes();
+        model.addAttribute("roomTypes", roomTypes);
         return "home";
     }
 
@@ -412,20 +414,20 @@ public class AppController {
      */
     @PostMapping("/payment")
     public String payment(HttpServletRequest request, Model model){
-//        String bookedRooms = request.getParameter("bookedRooms");
-//        StringBuffer stringBuffer= new StringBuffer(bookedRooms);
-//        stringBuffer.deleteCharAt(stringBuffer.length()-1);
-//        String[] rooms = bookedRooms.split(",");
-//        System.out.println(stringBuffer);
-//        RoomType roomType = roomTypeService.getByName(staticRoomType);
-//        for (String room : rooms) {
-//            Integer roomNumber = Integer.parseInt(room);
-//            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
-//            if (!(Objects.isNull(bookedRoom))) {
-//                model.addAttribute("message", "Room is already booked, Please choose another room");
-//                return "bookRoom";
-//            }
-//        }
+        String bookedRooms = request.getParameter("bookedRooms");
+        StringBuffer stringBuffer= new StringBuffer(bookedRooms);
+        stringBuffer.deleteCharAt(stringBuffer.length()-1);
+        String[] rooms = bookedRooms.split(",");
+        System.out.println(stringBuffer);
+        RoomType roomType = roomTypeService.getByName(staticRoomType);
+        for (String room : rooms) {
+            Integer roomNumber = Integer.parseInt(room);
+            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
+            if (!(Objects.isNull(bookedRoom))) {
+                model.addAttribute("message", "Room is already booked, Please choose another room");
+                return "bookRoom";
+            }
+        }
 //        for (String room : rooms) {
 //            Integer roomNumber = Integer.parseInt(room);
 //            BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
@@ -503,10 +505,8 @@ public class AppController {
     @RequestMapping("/clearAll")
     public String clearAll(Model model){
         model.addAttribute("successMessage", "Clearing Successful!");
-        roomTypeService.deleteAll();
         historyService.deleteAll();
         bookedRoomService.deleteAll();
-        roomService.deleteAll();
         return "admin";
     }
 }
