@@ -10,14 +10,32 @@ public class AdminService {
     @Autowired
     private AdminRepository adminRepository;
 
-    public void saveAdmin(Admin admin){
+    /**
+     * Method to save a new Admin
+     *
+     * @param admin
+     */
+    public void saveAdmin(Admin admin) {
         adminRepository.save(admin);
     }
 
+    /**
+     * Method to find Admin by email and password
+     *
+     * @param email
+     * @param password
+     * @return Admin
+     */
     public Admin getAdminByEmailAndPassword(String email, String password) {
         return adminRepository.findAdminByEmailAndPassword(email, password);
     }
 
+    /**
+     * Method to find Admin by email
+     *
+     * @param email
+     * @return
+     */
     public Admin getAdminByEmail(String email) {
         return adminRepository.findAdminByEmail(email);
     }

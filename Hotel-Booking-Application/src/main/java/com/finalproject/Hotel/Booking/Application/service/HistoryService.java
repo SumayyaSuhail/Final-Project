@@ -13,15 +13,31 @@ public class HistoryService {
     @Autowired
     private HistoryRepository historyRepository;
 
-    public void saveHistory(History history){
+    /**
+     * Method to save new History
+     *
+     * @param history
+     */
+    public void saveHistory(History history) {
         historyRepository.save(history);
     }
 
+    /**
+     * Method to get Histories of a user
+     *
+     * @param userId
+     * @return List of History
+     */
     public List<History> getHistoryByUserId(Long userId) {
         return historyRepository.findHistoryByUserId(userId);
     }
 
-    public List<History> getAllHistories(){
+    /**
+     * Method to find all histories
+     *
+     * @return List of History
+     */
+    public List<History> getAllHistories() {
         return historyRepository.findAll();
     }
 }

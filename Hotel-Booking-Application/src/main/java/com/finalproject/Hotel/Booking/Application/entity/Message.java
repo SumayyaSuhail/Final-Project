@@ -18,15 +18,17 @@ public class Message {
     private String subject;
     private String message;
 
-    public Message(){
+    public Message() {
 
     }
-    public Message(String name, String email, String subject, String message){
-        this.name=name;
-        this.email=email;
-        this.subject=subject;
-        this.message=message;
+
+    public Message(String name, String email, String subject, String message) {
+        this.name = name;
+        this.email = email;
+        this.subject = subject;
+        this.message = message;
     }
+
     public Long getId() {
         return id;
     }

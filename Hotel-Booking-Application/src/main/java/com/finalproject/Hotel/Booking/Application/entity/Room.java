@@ -24,18 +24,18 @@ public class Room {
     private Integer numberOfBeds;
     private String status;
 
-    public Room(){
+    public Room() {
 
     }
 
-    public Room(Integer roomNumber, String roomType, Double roomFare, Integer maxAdults, Integer maxChild, Integer numberOfBeds, String status){
-        this.roomNumber=roomNumber;
-        this.roomType=roomType;
-        this.roomFare=roomFare;
-        this.maxAdults=maxAdults;
-        this.maxChild=maxChild;
-        this.numberOfBeds=numberOfBeds;
-        this.status=status;
+    public Room(Integer roomNumber, String roomType, Double roomFare, Integer maxAdults, Integer maxChild, Integer numberOfBeds, String status) {
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.roomFare = roomFare;
+        this.maxAdults = maxAdults;
+        this.maxChild = maxChild;
+        this.numberOfBeds = numberOfBeds;
+        this.status = status;
     }
 
     public Long getId() {

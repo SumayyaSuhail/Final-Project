@@ -21,16 +21,16 @@ public class RoomType {
     @Column(name = "numberofbeds")
     private Integer numberOfBeds;
 
-    public RoomType(){
+    public RoomType() {
 
     }
 
-    public RoomType(String name, Double roomFare, Integer maxAdults, Integer maxChild, Integer numberOfBeds){
-        this.name=name;
-        this.roomFare=roomFare;
-        this.maxAdults=maxAdults;
-        this.maxChild=maxChild;
-        this.numberOfBeds=numberOfBeds;
+    public RoomType(String name, Double roomFare, Integer maxAdults, Integer maxChild, Integer numberOfBeds) {
+        this.name = name;
+        this.roomFare = roomFare;
+        this.maxAdults = maxAdults;
+        this.maxChild = maxChild;
+        this.numberOfBeds = numberOfBeds;
     }
 
     public Long getId() {

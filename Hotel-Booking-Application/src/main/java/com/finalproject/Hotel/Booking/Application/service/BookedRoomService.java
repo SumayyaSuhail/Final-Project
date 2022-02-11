@@ -12,9 +12,22 @@ public class BookedRoomService {
     @Autowired
     private BookedRoomRepository bookedRoomRepository;
 
-    public void saveBooking(BookedRoom bookedRoom){
+    /**
+     * Method to save a new BookedRoom
+     *
+     * @param bookedRoom
+     */
+    public void saveBooking(BookedRoom bookedRoom) {
         bookedRoomRepository.save(bookedRoom);
     }
+
+    /**
+     * Method to get a booked room by room number and room type
+     *
+     * @param roomNumber
+     * @param roomType
+     * @return BookedRoom
+     */
     public BookedRoom getBookedRoomByRoomNumberAndRoomType(Integer roomNumber, String roomType) {
         return bookedRoomRepository.findBookedRoomByRoomNumberAndRoomType(roomNumber, roomType);
     }

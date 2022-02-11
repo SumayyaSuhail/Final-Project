@@ -8,7 +8,6 @@ import java.util.Date;
 @Component
 @Entity
 public class History {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,16 +23,17 @@ public class History {
     private String bookedRooms;
     private Double amount;
 
-    public History(){
+    public History() {
 
     }
+
     public History(Long userId, String roomTypeId, Date bookedDate, Integer roomCount, String bookedRooms, Double amount) {
-        this.userId=userId;
-        this.roomTypeId=roomTypeId;
-        this.bookedDate=bookedDate;
-        this.roomCount=roomCount;
-        this.bookedRooms=bookedRooms;
-        this.amount=amount;
+        this.userId = userId;
+        this.roomTypeId = roomTypeId;
+        this.bookedDate = bookedDate;
+        this.roomCount = roomCount;
+        this.bookedRooms = bookedRooms;
+        this.amount = amount;
     }
 
     public Long getId() {

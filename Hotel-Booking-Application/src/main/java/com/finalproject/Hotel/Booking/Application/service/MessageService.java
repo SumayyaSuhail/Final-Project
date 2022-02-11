@@ -12,10 +12,20 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public void saveMessage(Message message){
+    /**
+     * Method to save a new Message from User
+     *
+     * @param message
+     */
+    public void saveMessage(Message message) {
         messageRepository.save(message);
     }
 
+    /**
+     * Method to return all histories to Admin
+     *
+     * @return List of Message
+     */
     public List<Message> getAllMessages() {
         return messageRepository.findAll();
     }

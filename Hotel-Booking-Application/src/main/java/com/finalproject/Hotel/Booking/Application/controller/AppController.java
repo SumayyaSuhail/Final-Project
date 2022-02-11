@@ -43,28 +43,49 @@ public class AppController {
     @Autowired
     private BookedRoomService bookedRoomService;
 
+    /**
+     * Method to return index page
+     * @return index.html
+     */
     @RequestMapping("/")
     public String index() {
         return "index";
     }
 
+    /**
+     * Method to return register page
+     * @return register.html
+     */
     @RequestMapping("/register")
     public String register() {
         return "register";
     }
 
-
+    /**
+     * Method to return login.html
+     * @return
+     */
     @RequestMapping("/login")
     public String login() {
         return "login";
     }
 
 
+    /**
+     * Method to return Admin's register page
+     * @return adminRegister.html
+     */
     @RequestMapping("/adminRegister")
     public String adminRegister() {
         return "adminRegister";
     }
 
+    /**
+     * Method to return login page after admin registers
+     * @param request
+     * @param model
+     * @return login.html
+     */
     @PostMapping("/adminLogin")
     public String loginAfterAdminRegister(HttpServletRequest request, Model model) {
         if (!(request.getParameter("password").equals(request.getParameter("confirmPassword")))) {
@@ -87,6 +108,12 @@ public class AppController {
         }
     }
 
+    /**
+     * Method to return login page after user registers
+     * @param request
+     * @param model
+     * @return login.html
+     */
     @PostMapping("/login")
     public String loginAfterRegister(HttpServletRequest request, Model model) {
         if (!(request.getParameter("password").equals(request.getParameter("confirmPassword")))) {
@@ -104,11 +131,21 @@ public class AppController {
         }
     }
 
+    /**
+     * Method to return user's home page
+     * @return home.html
+     */
     @RequestMapping("/home")
     public String home() {
         return "home";
     }
 
+    /**
+     * Method to return different home page for user and admin
+     * @param model
+     * @param request
+     * @return admin.html for admin and home.html for user
+     */
     @PostMapping("/home")
     public String homeAfterLogin(Model model, HttpServletRequest request) {
         User user = userService.getUserByEmailAndPassword(request.getParameter("email"), request.getParameter("password"));
@@ -133,13 +170,22 @@ public class AppController {
         }
     }
 
-
+    /**
+     * Method to display forgot password page
+     * @return forgotPassword.html
+     */
     @RequestMapping("/forgotPassword")
     public String forgotPassword() {
         return "forgotPassword";
     }
 
 
+    /**
+     * Method to return index page after password update
+     * @param request
+     * @param model
+     * @return index.html
+     */
     @PostMapping("/")
     public String updatePassword(HttpServletRequest request, Model model) {
         if (!(request.getParameter("newPassword").equals(request.getParameter("confirmPassword")))) {
@@ -168,16 +214,30 @@ public class AppController {
         }
     }
 
+    /**
+     * Method to return aboutUs page
+     * @return aboutUs.html
+     */
     @RequestMapping("/aboutUs")
     public String aboutUs() {
         return "aboutUs";
     }
 
+    /**
+     * Method to return contactUs page
+     * @return contactUs.html
+     */
     @RequestMapping("/contactUs")
     public String contactUs() {
         return "contactUs";
     }
 
+    /**
+     * Method to return contactUs page after contacting
+     * @param request
+     * @param model
+     * @return contactUs.html
+     */
     @PostMapping("/contactUs")
     public String afterContact(HttpServletRequest request, Model model) {
         model.addAttribute("successMessage", "Message Sent Successfully! Admin will contact you via Email!");
@@ -190,6 +250,12 @@ public class AppController {
         return "/contactUs";
     }
 
+    /**
+     * Method to display messages for admin
+     * @param request
+     * @param model
+     * @return messages.html
+     */
     @RequestMapping("/messages")
     public String messages(HttpServletRequest request, Model model) {
         List<Message> messages = messageService.getAllMessages();
@@ -197,6 +263,11 @@ public class AppController {
         return "messages";
     }
 
+    /**
+     * Method to display admins' home page
+     * @param model
+     * @return admin.html
+     */
     @RequestMapping("/admin")
     public String admin(Model model) {
         List<Room> rooms = roomService.getAllRooms();
@@ -204,11 +275,21 @@ public class AppController {
         return "admin";
     }
 
+    /**
+     * Method to return page to add room
+     * @return addRoom.html
+     */
     @RequestMapping("/addRoom")
     public String addRoom() {
         return "addRoom";
     }
 
+    /**
+     * Method to return addRoom page after adding a room
+     * @param request
+     * @param model
+     * @return addRoom.html
+     */
     @PostMapping("/addRoom")
     public String afterAddingRoom(HttpServletRequest request, Model model) {
         model.addAttribute("successMessage", "Room Added Successfully!");
@@ -223,6 +304,12 @@ public class AppController {
         return "addRoom";
     }
 
+    /**
+     * Method to view details of a room
+     * @param model
+     * @param request
+     * @return viewRoom.html
+     */
     @RequestMapping("/viewRoom")
     public String viewRoom(Model model, HttpServletRequest request) {
         roomId=Long.parseLong(request.getParameter("roomId"));
@@ -237,6 +324,12 @@ public class AppController {
         return "viewRoom";
     }
 
+    /**
+     * Method to view details of a room after editing
+     * @param model
+     * @param request
+     * @return viewRoom.html
+     */
     @PostMapping("/viewRoom")
     public String afterUpdate(HttpServletRequest request, Model model) {
         Room room = roomService.getRoomById(roomId);
@@ -254,6 +347,11 @@ public class AppController {
         return "viewRoom";
     }
 
+    /**
+     * Method to edit details of a room
+     * @param model
+     * @return editRoom.html
+     */
     @RequestMapping("/editRoom")
     public String editRoom(Model model){
         Room room=roomService.getRoomById(roomId);
@@ -267,6 +365,11 @@ public class AppController {
         return "editRoom";
     }
 
+    /**
+     * Method to deleteRoom
+     * @param model
+     * @return admin.html
+     */
     @RequestMapping("/deleteRoom")
     public String deleteRoom(Model model){
         Room room = roomService.getRoomById(roomId);
@@ -277,19 +380,22 @@ public class AppController {
         return "admin";
     }
 
+    /**
+     * Method to show history of bookings to admin
+     * @param model
+     * @return admin.html
+     */
     @RequestMapping("/history")
     public String history(Model model){
         model.addAttribute("histories", historyService.getAllHistories());
         return "history";
     }
 
-    @RequestMapping("/searchRoom")
-    public String searchRoom(HttpServletRequest request, Model model){
-        List<RoomType> roomTypes = roomTypeService.getAllTypes();
-        model.addAttribute("roomTypes", roomTypes);
-        return "searchRoom";
-    }
-
+    /**
+     * Method to return bookRoombpage
+     * @param request
+     * @return bookRoom.html
+     */
     @RequestMapping("/bookRoom")
     public String bookRoom(HttpServletRequest request){
         staticRoomType = request.getParameter("roomId");
@@ -300,6 +406,12 @@ public class AppController {
         return "bookRoom";
     }
 
+    /**
+     * Method to return payment page after booking room
+     * @param request
+     * @param model
+     * @return payment.html
+     */
     @PostMapping("/payment")
     public String payment(HttpServletRequest request, Model model){
         String bookedRooms = request.getParameter("bookedRooms");
@@ -339,23 +451,44 @@ public class AppController {
         historyService.saveHistory(history);
         return "payment";
     }
+
+    /**
+     * Method to show bookings of the user
+     * @param model
+     * @return myBookings.html
+     */
     @RequestMapping("/myBookings")
     public String myBookings(Model model){
         model.addAttribute("histories", historyService.getHistoryByUserId(userId));
         return "myBookings";
     }
 
+    /**
+     * Method to show existing types of room
+     * @param model
+     * @return addRoomType.html
+     */
     @RequestMapping("/addRoomType")
     public String addRoomType(Model model){
         model.addAttribute("types", roomTypeService.getAllTypes());
         return "addRoomType";
     }
 
+    /**
+     * Method to return addRoomType page
+     * @return addRoomType.html
+     */
     @RequestMapping("/addType")
     public String addType(){
         return "addType";
     }
 
+    /**
+     * Method to return addType page after adding a type
+     * @param request
+     * @param model
+     * @return addType.html
+     */
     @PostMapping("/addType")
     public String afterAddingRoomType(HttpServletRequest request, Model model) {
         model.addAttribute("successMessage", "Room Type Added Successfully!");

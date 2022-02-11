@@ -13,14 +13,30 @@ public class RoomTypeService {
     @Autowired
     private RoomTypeRepository repository;
 
+    /**
+     * Method to return all types of room type
+     *
+     * @return List of RoomType
+     */
     public List<RoomType> getAllTypes() {
         return repository.findAll();
     }
 
+    /**
+     * Method to find type By type name
+     *
+     * @param roomType
+     * @return RoomType
+     */
     public RoomType getByName(String roomType) {
         return repository.findByName(roomType);
     }
 
+    /**
+     * Method to save a new type of room
+     *
+     * @param addedType
+     */
     public void saveRoomType(RoomType addedType) {
         repository.save(addedType);
     }

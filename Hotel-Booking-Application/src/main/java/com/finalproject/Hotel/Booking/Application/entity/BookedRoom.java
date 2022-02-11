@@ -16,13 +16,15 @@ public class BookedRoom {
     private Integer roomNumber;
     @Column(name = "userid")
     private Long userId;
-    public BookedRoom(){
+
+    public BookedRoom() {
 
     }
-    public BookedRoom(String roomType, Integer roomNumber, Long userId){
-        this.roomType=roomType;
-        this.roomNumber=roomNumber;
-        this.userId=userId;
+
+    public BookedRoom(String roomType, Integer roomNumber, Long userId) {
+        this.roomType = roomType;
+        this.roomNumber = roomNumber;
+        this.userId = userId;
     }
 
     public Long getId() {
