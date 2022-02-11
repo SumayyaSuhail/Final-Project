@@ -398,7 +398,7 @@ public class AppController {
      * @param request
      * @return bookRoom.html
      */
-    @RequestMapping("/bookRoom")
+    @PostMapping("/bookRoom")
     public String bookRoom(HttpServletRequest request, Model model){
         staticRoomType = request.getParameter("roomId");
         bookedDate= Date.valueOf(request.getParameter("bookingDate"));
@@ -436,7 +436,7 @@ public class AppController {
         }
         for (String room : rooms) {
             Integer roomNumber = Integer.parseInt(room);
-            Room selectedRoom = roomService.getRoomByNumberAndType(roomNumber, roomType.getName());
+            Room selectedRoom = roomService.getRoomByNumberAndType(roomNumber, staticRoomType);
             selectedRoom.setStatus("true");
             roomService.saveRoom(selectedRoom);
         }
@@ -508,6 +508,8 @@ public class AppController {
         model.addAttribute("successMessage", "Clearing Successful!");
         bookingsService.deleteAll();
         bookedRoomService.deleteAll();
+        List<Room> rooms = roomService.getAllRooms();
+        model.addAttribute("rooms", rooms);
         return "admin";
     }
 }
