@@ -397,12 +397,13 @@ public class AppController {
      * @return bookRoom.html
      */
     @RequestMapping("/bookRoom")
-    public String bookRoom(HttpServletRequest request){
+    public String bookRoom(HttpServletRequest request, Model model){
         staticRoomType = request.getParameter("roomId");
         bookedDate= Date.valueOf(request.getParameter("bookingDate"));
         numberOfDays=Integer.parseInt(request.getParameter("numberOfDays"));
         System.out.println(bookedDate);
         System.out.println(numberOfDays);
+        model.addAttribute("message", staticRoomType);
         return "bookRoom";
     }
 
