@@ -418,7 +418,6 @@ public class AppController {
         StringBuffer stringBuffer= new StringBuffer(bookedRooms);
         stringBuffer.deleteCharAt(stringBuffer.length()-1);
         String[] rooms = bookedRooms.split(",");
-        model.addAttribute("message", bookedRooms);
         System.out.println(stringBuffer);
         RoomType roomType = roomTypeService.getByName(staticRoomType);
         for (String room : rooms) {
@@ -448,8 +447,8 @@ public class AppController {
         model.addAttribute("bookedDate", bookedDate);
         Double amount = ((rooms.length) * (roomType.getRoomFare()))*(numberOfDays);
         model.addAttribute("amount", amount);
-//        History history = new History(userId, staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
-//        historyService.saveHistory(history);
+        History history = new History(userId, staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
+        historyService.saveHistory(history);
         return "payment";
     }
 
