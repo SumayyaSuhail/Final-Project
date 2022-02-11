@@ -415,7 +415,7 @@ public class AppController {
     @PostMapping("/payment")
     public String payment(HttpServletRequest request, Model model){
         String bookedRooms = request.getParameter("bookedRooms");
-        model.addAttribute("message", userId+bookedRooms);
+        model.addAttribute("message", userId);
         StringBuffer stringBuffer= new StringBuffer(bookedRooms);
         stringBuffer.deleteCharAt(stringBuffer.length()-1);
         String[] rooms = bookedRooms.split(",");
@@ -432,7 +432,7 @@ public class AppController {
         for (String room : rooms) {
             Integer roomNumber = Integer.parseInt(room);
             BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
-            BookedRoom bookedRoom1 = new BookedRoom(roomType.getName(), roomNumber, userId);
+            BookedRoom bookedRoom1 = new BookedRoom(staticRoomType, roomNumber, userId);
             bookedRoomService.saveBooking(bookedRoom1);
         }
 //        for (String room : rooms) {
