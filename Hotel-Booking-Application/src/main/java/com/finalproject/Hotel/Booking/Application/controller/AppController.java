@@ -23,7 +23,7 @@ public class AppController {
     static Date bookedDate;
     static Integer numberOfDays;
     @Autowired
-    private HistoryService historyService;
+    private BookingsService bookingsService;
 
     @Autowired
     private UserService userService;
@@ -389,7 +389,7 @@ public class AppController {
      */
     @RequestMapping("/history")
     public String history(Model model){
-        model.addAttribute("histories", historyService.getAllHistories());
+        model.addAttribute("histories", bookingsService.getAllBookings());
         return "history";
     }
 
@@ -447,8 +447,8 @@ public class AppController {
         model.addAttribute("bookedDate", bookedDate);
         Double amount = ((rooms.length) * (roomType.getRoomFare()))*(numberOfDays);
         model.addAttribute("amount", amount);
-        History history = new History(userId, staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
-        historyService.saveHistory(history);
+        Bookings history= new Bookings(userId, staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
+        bookingsService.saveBooking(history);
         return "payment";
     }
 
@@ -459,7 +459,7 @@ public class AppController {
      */
     @RequestMapping("/myBookings")
     public String myBookings(Model model){
-        List<History> histories = historyService.getHistoryByUserId(userId);
+        List<Bookings> histories = bookingsService.getBookingsByUserId(userId);
         model.addAttribute("histories", histories);
         return "myBookings";
     }
@@ -506,7 +506,7 @@ public class AppController {
     @RequestMapping("/clearAll")
     public String clearAll(Model model){
         model.addAttribute("successMessage", "Clearing Successful!");
-        historyService.deleteAll();
+        bookingsService.deleteAll();
         bookedRoomService.deleteAll();
         return "admin";
     }
