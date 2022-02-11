@@ -55,11 +55,11 @@ public class RoomService {
      * Method to find a room by room number and type
      *
      * @param roomNumber
-     * @param name
+     * @param roomType
      * @return Room
      */
-    public Room getRoomByNumberAndType(Integer roomNumber, String name) {
-        return roomRepository.findRoomByNumberAndType(roomNumber, name);
+    public Room getRoomByRoomNumberAndRoomType(Integer roomNumber, String roomType) {
+        return roomRepository.findRoomByRoomNumberAndRoomType(roomNumber, roomType);
     }
 
     public void deleteAll() {
