@@ -61,4 +61,8 @@ public class RoomService {
     public Room getRoomByNumberAndType(Integer roomNumber, String name) {
         return roomRepository.findRoomByNumberAndType(roomNumber, name);
     }
+
+    public void deleteAll() {
+        roomRepository.deleteAll();
+    }
 }

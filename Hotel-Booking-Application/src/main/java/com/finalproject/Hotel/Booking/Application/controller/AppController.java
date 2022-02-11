@@ -508,6 +508,7 @@ public class AppController {
         roomTypeService.deleteAll();
         historyService.deleteAll();
         bookedRoomService.deleteAll();
+        roomService.deleteAll();
         return "admin";
     }
 }
