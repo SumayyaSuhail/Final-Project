@@ -401,9 +401,6 @@ public class AppController {
         staticRoomType = request.getParameter("roomId");
         bookedDate= Date.valueOf(request.getParameter("bookingDate"));
         numberOfDays=Integer.parseInt(request.getParameter("numberOfDays"));
-        System.out.println(bookedDate);
-        System.out.println(numberOfDays);
-        model.addAttribute("message", staticRoomType);
         return "bookRoom";
     }
 
@@ -441,15 +438,15 @@ public class AppController {
             selectedRoom.setStatus("true");
             roomService.saveRoom(selectedRoom);
         }
-        model.addAttribute("userId", userId);
-        model.addAttribute("roomTypeId", staticRoomType);
-        model.addAttribute("roomCount", rooms.length);
-        model.addAttribute("rooms", stringBuffer);
-        model.addAttribute("bookedDate", bookedDate);
-        Double amount = ((rooms.length) * (roomType.getRoomFare()))*(numberOfDays);
-        model.addAttribute("amount", amount);
-        History history = new History(userId, staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
-        historyService.saveHistory(history);
+//        model.addAttribute("userId", userId);
+//        model.addAttribute("roomTypeId", staticRoomType);
+//        model.addAttribute("roomCount", rooms.length);
+//        model.addAttribute("rooms", stringBuffer);
+//        model.addAttribute("bookedDate", bookedDate);
+//        Double amount = ((rooms.length) * (roomType.getRoomFare()))*(numberOfDays);
+//        model.addAttribute("amount", amount);
+//        History history = new History(userId, staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
+//        historyService.saveHistory(history);
         return "payment";
     }
 
