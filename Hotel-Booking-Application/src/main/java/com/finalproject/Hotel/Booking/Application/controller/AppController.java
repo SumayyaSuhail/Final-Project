@@ -418,7 +418,7 @@ public class AppController {
         StringBuffer stringBuffer= new StringBuffer(bookedRooms);
         stringBuffer.deleteCharAt(stringBuffer.length()-1);
         String[] rooms = bookedRooms.split(",");
-        model.addAttribute("message", rooms);
+        model.addAttribute("message", bookedRooms);
         System.out.println(stringBuffer);
         RoomType roomType = roomTypeService.getByName(staticRoomType);
         for (String room : rooms) {
