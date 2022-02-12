@@ -34,4 +34,8 @@ public class BookedRoomService {
     public void deleteAll() {
         bookedRoomRepository.deleteAll();
     }
+
+    public void deleteById(Long id) {
+        bookedRoomRepository.deleteById(id);
+    }
 }

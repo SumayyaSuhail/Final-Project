@@ -337,6 +337,12 @@ public class AppController {
         Room room = roomService.getRoomById(roomId);
         room.setRoomFare(Double.parseDouble(request.getParameter("roomFare")));
         room.setStatus(request.getParameter("status"));
+        if((request.getParameter("status")).equals("false")){
+            BookedRoom bookedRoom=bookedRoomService.getBookedRoomByRoomNumberAndRoomType(room.getRoomNumber(),room.getRoomType());
+            if(!(Objects.isNull(bookedRoom))){
+                bookedRoomService.deleteById(bookedRoom.getId());
+            }
+        }
         roomService.saveRoom(room);
         model.addAttribute("roomNumber", room.getRoomNumber());
         model.addAttribute("roomType", room.getRoomType());
