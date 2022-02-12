@@ -438,7 +438,7 @@ public class AppController {
             Integer roomNumber = Integer.parseInt(room);
             Room chosenRoom = roomService.getRoomByRoomNumberAndRoomType(roomNumber, staticRoomType);
             chosenRoom.setStatus("true");
-            roomService.saveRoom(chosenRoom);
+            //roomService.saveRoom(chosenRoom);
         }
         model.addAttribute("userId", userId);
         model.addAttribute("roomTypeId", staticRoomType);
