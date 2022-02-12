@@ -96,6 +96,10 @@ public class AppController {
                 model.addAttribute("message", "Invalid Admin Code!!!");
                 return "adminRegister";
             } else {
+                if(!(((request.getParameter("phoneNumber")).length())==10)){
+                    model.addAttribute("message", "Invalid Phone Number!!!");
+                    return "adminRegister";
+                }
                 model.addAttribute("successMessage", "Registered Successfully!!!");
                 String email = request.getParameter("email");
                 String userName = request.getParameter("userName");
