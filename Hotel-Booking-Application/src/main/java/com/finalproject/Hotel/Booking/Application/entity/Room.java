@@ -3,10 +3,10 @@ package com.finalproject.Hotel.Booking.Application.entity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-
 @Component
 @Entity
 public class Room {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

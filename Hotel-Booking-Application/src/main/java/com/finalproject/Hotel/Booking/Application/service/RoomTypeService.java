@@ -1,6 +1,5 @@
 package com.finalproject.Hotel.Booking.Application.service;
 
-import com.finalproject.Hotel.Booking.Application.entity.Room;
 import com.finalproject.Hotel.Booking.Application.entity.RoomType;
 import com.finalproject.Hotel.Booking.Application.repository.RoomTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
