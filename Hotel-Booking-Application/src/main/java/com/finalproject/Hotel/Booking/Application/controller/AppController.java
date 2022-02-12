@@ -437,10 +437,10 @@ public class AppController {
         String[] chosenRooms=(stringBuffer.toString()).split(",");
         for (String room: chosenRooms) {
             Integer roomNumber = Integer.parseInt(room);
-            Room chosenRoom = roomService.getRoomByRoomNumberAndRoomType(4, "AC");
+            Room chosenRoom = roomService.getRoomByRoomNumberAndRoomType(roomNumber, staticRoomType);
             model.addAttribute(chosenRoom.getStatus());
-            //chosenRoom.setStatus("true");
-            //roomService.saveRoom(chosenRoom);
+            chosenRoom.setStatus("true");
+            roomService.saveRoom(chosenRoom);
         }
         model.addAttribute("userId", userId);
         model.addAttribute("roomTypeId", staticRoomType);
