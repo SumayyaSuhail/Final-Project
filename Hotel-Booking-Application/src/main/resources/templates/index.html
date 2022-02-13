@@ -11,7 +11,9 @@
     .bg-img {
   /* The image used */
 
-  min-height: 500px;
+ background-image: url("index.jpg");
+
+  min-height: 750px;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
@@ -41,7 +43,7 @@
 /* Navbar links */
 .topnav a {
   float: left;
-  color: rgb(141, 36, 36);
+  color: rgb(15, 34, 51);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -49,9 +51,10 @@
   font-weight:bold;
 }
 .container-fluid-padding{
-    background-color: rgb(99,26,26);
+    background-color: rgb(15, 34, 51);
     color: white;
     padding:5%;
+    margin-top:0%;
     }
 .topnav a:hover {
   background-color: #ddd;
@@ -62,18 +65,16 @@
   margin-top: 5%;
   margin-left: 24%;
   margin-right:27%;
+  margin-bottom: 0%;
 }
 
-h1{
-   color:white;
-   text-align:center;
-   padding-top:2%;
-}
+
 
 .slidershow{
     width:700px;
-    height:480px;
+    height:580px;
     overflow:hidden;
+    padding:5%;
 }
 .middle{
 position: absolute;
@@ -142,55 +143,66 @@ visibility: hidden;
   margin: 1%;
   margin-left:15%;
 }
+.book{
+background-color:white;
+text-align:center;
+margin-top:30%;
+padding:1.5%;
+}
 
     </style>
 </head>
-<body style="background-color:rgb(99,26,26)">
-<h1>My Booking!</h1>
-<div class="card-body">
-    <div class="bg-img">
-        <div class="navcontainer">
-            <div class="topnav">
-                <a href="#">HOME</a>
-                <a href="/aboutUs">ABOUT US</a>
-                <a href="/register">REGISTER</a>
-                <a href="/login">LOGIN</a>
-                <a href="/contactUs">CONTACT US</a>
-            </div>
+<body>
+<div class="bg-img">
+    <div class="navcontainer">
+        <div class="topnav">
+            <a href="#">HOME</a>
+            <a href="/aboutUs">ABOUT US</a>
+            <a href="/register">REGISTER</a>
+            <a href="/login">LOGIN</a>
+            <a href="/contactUs">CONTACT US</a>
         </div>
-    </div>
-    <div class="slidershow middle">
-        <div class="slides">
-            <input type="radio" name="r" id="r1" checked>
-            <input type="radio" name="r" id="r2">
-            <input type="radio" name="r" id="r3">
-            <input type="radio" name="r" id="r4">
-            <input type="radio" name="r" id="r5">
-            <div class="slide s1">
-                <img src="image5.jpg" alt="">
-            </div>
-            <div class="slide">
-                <img src="image2.jpg" alt="">
-            </div>
-            <div class="slide">
-                <img src="image3.jpg" alt="">
-            </div>
-            <div class="slide">
-                <img src="image4.jpg" alt="">
-            </div>
-            <div class="slide">
-                <img src="image1.png" alt="">
-            </div>
-        </div>
-        <div class="navigation">
-            <label for="r1" class="bar"></label>
-            <label for="r2" class="bar"></label>
-            <label for="r3" class="bar"></label>
-            <label for="r4" class="bar"></label>
-            <label for="r5" class="bar"></label>
+        <div class="book">
+            <h1>My Booking!</h1>
+            <h4>Home away from home...</h4>
         </div>
     </div>
 </div>
+<!--<div class="card-body">-->
+<!--    <div class="slidershow middle" style="background-color:white">-->
+<!--        <div class="slidershow middle">-->
+<!--        <div class="slides">-->
+<!--            <input type="radio" name="r" id="r1" checked>-->
+<!--            <input type="radio" name="r" id="r2">-->
+<!--            <input type="radio" name="r" id="r3">-->
+<!--            <input type="radio" name="r" id="r4">-->
+<!--            <input type="radio" name="r" id="r5">-->
+<!--            <div class="slide s1">-->
+<!--                <img src="image5.jpg" alt="">-->
+<!--            </div>-->
+<!--            <div class="slide">-->
+<!--                <img src="image2.jpg" alt="">-->
+<!--            </div>-->
+<!--            <div class="slide">-->
+<!--                <img src="image3.jpg" alt="">-->
+<!--            </div>-->
+<!--            <div class="slide">-->
+<!--                <img src="image4.jpg" alt="">-->
+<!--            </div>-->
+<!--            <div class="slide">-->
+<!--                <img src="image1.png" alt="">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="navigation">-->
+<!--            <label for="r1" class="bar"></label>-->
+<!--            <label for="r2" class="bar"></label>-->
+<!--            <label for="r3" class="bar"></label>-->
+<!--            <label for="r4" class="bar"></label>-->
+<!--            <label for="r5" class="bar"></label>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <footer>
     <div class="container-fluid-padding">
         <div class="row text-centre">
@@ -200,7 +212,7 @@ visibility: hidden;
                 <p>City, State, 000000</p>
             </div>
             <div class="col-12">
-                <h4>&copy; MyBooking2020</h4>
+                <h5>&copy; MyBooking2020</h5>
             </div>
 
         </div>

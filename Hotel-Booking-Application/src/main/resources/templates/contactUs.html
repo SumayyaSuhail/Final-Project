@@ -25,11 +25,9 @@ input[type=email], input[type=text] {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  background-color: rgb(247,247,218);
   box-sizing: border-box;
 }
 .input[type=email]:focus, input[type=text]:focus {
-  background-color: rgb(247,247,218);
   outline: none;
 }
 
@@ -39,11 +37,10 @@ width: 100%;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  background-color: rgb(247,247,218);
   box-sizing: border-box;
 }
 button {
-  background-color:rgb(99,26,26);
+  background-color:rgb(15,34,51);
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -79,7 +76,7 @@ button:hover {
 /* Navbar links */
 .topnav a {
   float: left;
-  color: rgb(141, 36, 36);
+  color: rgb(15,34,51);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -87,7 +84,7 @@ button:hover {
   font-weight:bold;
 }
 .container-fluid-padding{
-    background-color: rgb(99,26,26);
+    background-color: rgb(15,34,51);
     color: white;
     padding: 5%;
     }
@@ -116,12 +113,26 @@ text-align:center;
 text-align: center;
 color: green;
 }
+body {
+  background-image: url('contactUs.jpg');
+  /* The image used */
+
+  min-height: 100px;
+  height:100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* Needed to position the navbar */
+  position: relative;
+}
 
     </style>
 </head>
-<body style="background-color:rgb(99,26,26)">
+<body>
 <h1>My Booking!</h1>
-<div class="card-body" style="background-color:rgb(247,247,218)">
+<div class="card-body" style="background-color:rgb(235, 228, 228)">
     <div class="mt-4">
      <span class="text-center text-success">
          <div th:text="${successMessage}"/>

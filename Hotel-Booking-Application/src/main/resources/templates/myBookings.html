@@ -9,7 +9,6 @@
     <style>
     .bg-img {
   /* The image used */
-  background-image: url("index.jpg");
 
   min-height: 100px;
   /* Center and scale the image nicely */
@@ -20,7 +19,19 @@
   /* Needed to position the navbar */
   position: relative;
 }
+body {
+  background-image: url('myBookings.jpg');
+  /* The image used */
 
+  min-height: 200px;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* Needed to position the navbar */
+  position: relative;
+}
 .bg {
     height: 100%;
 }
@@ -40,7 +51,7 @@
 /* Navbar links */
 .topnav a {
   float: left;
-  color: rgb(141, 36, 36);
+  color: rgb(15,34,51);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -48,7 +59,7 @@
 }
 
 .container-fluid-padding{
-    background-color: rgb(99,26,26);
+    background-color: rgb(15,34,51);
     color: white;
     }
 .topnav a:hover {
@@ -56,19 +67,19 @@
   color: black;
 }
 h1{
-color:rgb(99,26,26);
+color:white;
 padding-top:2%;
 padding-left:65%;
 }
 
 h3{
-color:rgb(99,26,26);
+color:white;
 padding-top:2%;
 padding-left:65%;
 }
 
 button {
-  background-color:rgb(99,26,26);
+  background-color:rgb(15,34,51);
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -81,7 +92,7 @@ button {
   margin-top: 5%;
   margin-left: 25%;
   margin-right:29%;
-  margin-bottom: 8%;
+  margin-bottom: 18%;
 }
 
 .content-table {
@@ -95,7 +106,7 @@ button {
 }
 
 .content-table thead tr {
-  background-color: rgb(99,26,26);
+  background-color: rgb(15,34,51);
   color: white;
   text-align: left;
   font-weight: bold;
@@ -138,6 +149,7 @@ text-align: center;
 color: green;
 }
 
+
     </style>
 </head>
 <body>
@@ -157,7 +169,7 @@ color: green;
          <div th:text="${successMessage}"/>
     </span>
 </div>
-<div class="card-body" style="background-color:rgb(247,247,218)">
+<div class="card-body" style="background-color:rgb(235, 228, 228)">
     <form action="/history" method="post">
         <div class="container-table">
             <table class="content-table">
