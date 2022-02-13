@@ -12,8 +12,7 @@ public class Admin {
     private Long id;
     @Column(nullable = false, unique = true)
     private String email;
-    @Column(name = "adminname")
-    private String adminName;
+    private String username;
     @Column(name = "phonenumber", unique = true, nullable = false)
     private String phoneNumber;
     @Column(nullable = false)
@@ -23,9 +22,9 @@ public class Admin {
 
     }
 
-    public Admin(String email, String adminName, String password, String phoneNumber) {
+    public Admin(String email, String username, String password, String phoneNumber) {
         this.email = email;
-        this.adminName = adminName;
+        this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
@@ -46,12 +45,12 @@ public class Admin {
         this.email = email;
     }
 
-    public String getAdminName() {
-        return adminName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPhoneNumber() {

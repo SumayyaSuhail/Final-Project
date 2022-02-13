@@ -30,5 +30,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
      *
      * @return User
      */
-    User findUserByUserId(Long userId);
+    User findUserByUsername(String username);
 }

@@ -102,10 +102,10 @@ public class AppController {
                 }
                 model.addAttribute("successMessage", "Registered Successfully!!!");
                 String email = request.getParameter("email");
-                String userName = request.getParameter("userName");
+                String username = request.getParameter("username");
                 String password = request.getParameter("password");
                 String phoneNumber = request.getParameter("phoneNumber");
-                Admin admin = new Admin(email, userName, password, phoneNumber);
+                Admin admin = new Admin(email, username, password, phoneNumber);
                 adminService.saveAdmin(admin);
                 return "login";
             }
@@ -130,10 +130,10 @@ public class AppController {
             }
             model.addAttribute("successMessage", "Registered Successfully!!!");
             String email = request.getParameter("email");
-            String userName = request.getParameter("userName");
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
             String phoneNumber = request.getParameter("phoneNumber");
-            User user = new User(email, userName, password, phoneNumber);
+            User user = new User(email, username, password, phoneNumber);
             userService.saveUser(user);
             return "login";
         }
@@ -158,21 +158,33 @@ public class AppController {
      */
     @PostMapping("/home")
     public String homeAfterLogin(Model model, HttpServletRequest request) {
-        User user = userService.getUserByEmailAndPassword(request.getParameter("email"), request.getParameter("password"));
+        User user = userService.getUserByUsername(request.getParameter("username"));
         if (!(Objects.isNull(user))) {
-            model.addAttribute("successMessage", "Login Successful!!!");
-            userId = user.getUserId();
-            List<RoomType> roomTypes = roomTypeService.getAllTypes();
-            model.addAttribute("roomTypes", roomTypes);
-            return "home";
-        } else {
-            Admin admin = adminService.getAdminByEmailAndPassword(request.getParameter("email"), request.getParameter("password"));
-            if (!(Objects.isNull(admin))) {
+            if((user.getPassword()).equals(request.getParameter("password"))){
                 model.addAttribute("successMessage", "Login Successful!!!");
-                adminId = admin.getId();
-                List<Room> rooms = roomService.getAllRooms();
-                model.addAttribute("rooms", rooms);
-                return "admin";
+                userId = user.getUserId();
+                List<RoomType> roomTypes = roomTypeService.getAllTypes();
+                model.addAttribute("roomTypes", roomTypes);
+                return "home";
+            }
+            else{
+                model.addAttribute("message", "Invalid Password!!!");
+                return "login";
+            }
+        } else {
+            Admin admin = adminService.getAdminByUsername(request.getParameter("username"));
+            if (!(Objects.isNull(admin))) {
+                if((admin.getPassword()).equals(request.getParameter("password"))){
+                    model.addAttribute("successMessage", "Login Successful!!!");
+                    adminId = admin.getId();
+                    List<Room> rooms = roomService.getAllRooms();
+                    model.addAttribute("rooms", rooms);
+                    return "admin";
+                }
+                else{
+                    model.addAttribute("message", "Invalid Password!!!");
+                    return "login";
+                }
             } else {
                 model.addAttribute("message", "Invalid user credentials!!!");
                 return "login";

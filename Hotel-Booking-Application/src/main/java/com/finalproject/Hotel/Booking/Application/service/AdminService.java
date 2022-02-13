@@ -39,4 +39,8 @@ public class AdminService {
     public Admin getAdminByEmail(String email) {
         return adminRepository.findAdminByEmail(email);
     }
+
+    public Admin getAdminByUsername(String username){
+        return adminRepository.findAdminByUsername(username);
+    }
 }
