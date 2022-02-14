@@ -4,6 +4,7 @@ package com.finalproject.Hotel.Booking.Application;
 import com.finalproject.Hotel.Booking.Application.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/admin","/addRoom","/addRoomType","/addType","/editRoom","/history","/messages","/viewRoom").hasRole("ADMIN")
                 .antMatchers("/bookRoom","/home","/myBookings","/payment").hasRole("USER")
+                .antMatchers(HttpMethod.POST,"contactUs").permitAll()
                 .antMatchers("/").permitAll()
                 .and().formLogin()
                 .loginPage("/login").defaultSuccessUrl("/success");
