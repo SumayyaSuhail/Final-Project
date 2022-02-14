@@ -5,11 +5,13 @@ import com.finalproject.Hotel.Booking.Application.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
@@ -439,7 +441,7 @@ public class AppController {
      * @return payment.html
      */
     @PostMapping("/payment")
-    public String payment(HttpServletRequest request, Model model){
+    public String payment(HttpServletRequest request, Model model, Principal principal){
         String bookedRooms = request.getParameter("bookedRooms");
         StringBuffer stringBuffer= new StringBuffer(bookedRooms);
         stringBuffer.deleteCharAt(stringBuffer.length()-1);
@@ -454,10 +456,11 @@ public class AppController {
                 return "bookRoom";
             }
         }
+        User user=userService.getUserByUsername(principal.getName());
         for (String room : rooms) {
             Integer roomNumber = Integer.parseInt(room);
             BookedRoom bookedRoom = bookedRoomService.getBookedRoomByRoomNumberAndRoomType(roomNumber, roomType.getName());
-            BookedRoom bookedRoom1 = new BookedRoom(staticRoomType, roomNumber, userId);
+            BookedRoom bookedRoom1 = new BookedRoom(staticRoomType, roomNumber, user.getUserId());
             bookedRoomService.saveBooking(bookedRoom1);
         }
         String[] chosenRooms=(stringBuffer.toString()).split(",");
@@ -468,14 +471,14 @@ public class AppController {
             chosenRoom.setStatus("true");
             roomService.saveRoom(chosenRoom);
         }
-        model.addAttribute("userId", userId);
+        model.addAttribute("userId", user.getUserId());
         model.addAttribute("roomTypeId", staticRoomType);
         model.addAttribute("roomCount", rooms.length);
         model.addAttribute("rooms", stringBuffer);
         model.addAttribute("bookedDate", bookedDate);
         Double amount = ((rooms.length) * (roomType.getRoomFare()))*(numberOfDays);
         model.addAttribute("amount", amount);
-        Bookings history= new Bookings(userId, staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
+        Bookings history= new Bookings(user.getUserId(), staticRoomType, bookedDate, rooms.length, stringBuffer.toString(), amount);
         bookingsService.saveBooking(history);
         return "payment";
     }
@@ -486,8 +489,9 @@ public class AppController {
      * @return myBookings.html
      */
     @RequestMapping("/myBookings")
-    public String myBookings(Model model){
-        List<Bookings> histories = bookingsService.getBookingsByUserId(userId);
+    public String myBookings(Model model, Principal principal){
+        User user = userService.getUserByUsername(principal.getName());
+        List<Bookings> histories = bookingsService.getBookingsByUserId(user.getUserId());
         model.addAttribute("histories", histories);
         return "myBookings";
     }
@@ -539,5 +543,14 @@ public class AppController {
         List<Room> rooms = roomService.getAllRooms();
         model.addAttribute("rooms", rooms);
         return "admin";
+    }
+
+    @GetMapping("/success")
+    public String login(Principal principal){
+        String username= principal.getName();
+        if (username.equals("admin")){
+            return "redirect:/admin";
+        }
+        return "redirect:/home";
     }
 }

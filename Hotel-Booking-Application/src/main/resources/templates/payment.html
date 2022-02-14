@@ -120,15 +120,14 @@ background-color:rgb(15,34,51);
         </ul>
     </div>
     <div>
-        <a class="nav-link" href="/" style="color:  rgb(99,26,26);">Logout</a>
+        <a class="nav-link" href="/logout" style="color:  rgb(99,26,26);">Logout</a>
     </div>
 </nav>
 <h1>My Booking!</h1>
 <div class="container">
     <div class="mt-4">
      <span class="text-center text-success">
-         <div th:text="Thank you for believing in us.
-                        Have a pleasant day!"/>
+         <div th:text="${message}"/>
     </span>
     </div>
         <h2>Payment</h2>

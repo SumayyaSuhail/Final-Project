@@ -24,10 +24,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-//                .antMatchers().hasRole("ADMIN")
+                .antMatchers("/admin","/addRoom","/addRoomType","/addType","/editRoom","/history","/messages","/viewRoom").hasRole("ADMIN")
+                .antMatchers("/bookRoom","/home","/myBookings","/payment").hasRole("USER")
                 .antMatchers("/").permitAll()
                 .and().formLogin()
-                .loginPage("/login");
+                .loginPage("/login").defaultSuccessUrl("/success");
     }
     @Bean
     public PasswordEncoder getPasswordEncoder(){
