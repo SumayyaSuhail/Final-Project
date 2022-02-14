@@ -271,7 +271,7 @@ public class AppController {
         String message = request.getParameter("message");
         Message newMessage = new Message(name, email, subject, message);
         messageService.saveMessage(newMessage);
-        return "/contactUs";
+        return "redirect:/contactUs";
     }
 
     /**
