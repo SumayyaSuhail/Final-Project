@@ -118,7 +118,7 @@ public class AppController {
      * @param model
      * @return login.html
      */
-    @PostMapping("/login")
+    @PostMapping("/register")
     public String loginAfterRegister(HttpServletRequest request, Model model) {
         if (!(request.getParameter("password").equals(request.getParameter("confirmPassword")))) {
             model.addAttribute("message", "Re-enter the same password!!!");
